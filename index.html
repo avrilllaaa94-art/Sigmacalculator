@@ -1,145 +1,221 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Navy Blue Calculator</title>
-
-<style>
-    body {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        height: 100vh;
-        background: #0a192f; /* Navy background */
-        font-family: Arial, sans-serif;
-    }
-
-    .calculator {
-        background: #112240; /* Dark navy */
-        padding: 20px;
-        border-radius: 12px;
-        box-shadow: 0 10px 25px rgba(0,0,0,0.4);
-        width: 320px;
-    }
-
-    .display {
-        width: 100%;
-        height: 60px;
-        background: #0f3057; /* Deep blue */
-        color: #64b5f6; /* Light blue text */
-        text-align: right;
-        padding: 10px;
-        font-size: 26px;
-        border: none;
-        border-radius: 8px;
-        margin-bottom: 15px;
-        box-sizing: border-box;
-    }
-
-    .buttons {
-        display: grid;
-        grid-template-columns: repeat(4, 1fr);
-        gap: 10px;
-    }
-
-    button {
-        padding: 15px;
-        font-size: 18px;
-        border: none;
-        border-radius: 8px;
-        cursor: pointer;
-        background: #1b3a6b; /* Blue buttons */
-        color: #ffffff;
-        transition: 0.2s;
-    }
-
-    button:hover {
-        background: #274c8e;
-    }
-
-    .operator {
-        background: #1e56a0; /* Brighter blue */
-    }
-
-    .operator:hover {
-        background: #2f6fcb;
-    }
-
-    .equal {
-        background: #0d6efd; /* Strong blue */
-        grid-column: span 2;
-    }
-
-    .equal:hover {
-        background: #0b5ed7;
-    }
-
-    .clear {
-        background: #102a43; /* Navy shade */
-    }
-
-    .clear:hover {
-        background: #1c3d5a;
-    }
-</style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ulaanbaatar Elite International School | UEIS</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Segoe UI', system-ui, sans-serif;
+            line-height: 1.8;
+            scroll-behavior: smooth;
+        }
+        .navbar {
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+        .hero {
+            background: linear-gradient(rgba(0,0,0,0.75), rgba(0,0,0,0.75)), 
+                        url('https://picsum.photos/id/1015/1920/1080') center/cover no-repeat;
+            height: 100vh;
+            color: white;
+            display: flex;
+            align-items: center;
+        }
+        .section-title {
+            position: relative;
+            display: inline-block;
+            padding-bottom: 15px;
+        }
+        .section-title:after {
+            content: '';
+            position: absolute;
+            width: 70%;
+            height: 4px;
+            background: #ffd700;
+            bottom: 0;
+            left: 15%;
+        }
+        .card {
+            transition: all 0.4s ease;
+            border: none;
+        }
+        .card:hover {
+            transform: translateY(-15px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.15);
+        }
+        .nav-link {
+            transition: color 0.3s;
+        }
+        .nav-link:hover {
+            color: #ffd700 !important;
+        }
+        .gold-accent {
+            color: #ffd700;
+        }
+    </style>
 </head>
-
 <body>
 
-<div class="calculator">
-    <input type="text" class="display" id="display" disabled>
-
-    <div class="buttons">
-        <button class="clear" onclick="clearDisplay()">C</button>
-        <button onclick="deleteLast()">DEL</button>
-        <button class="operator" onclick="appendValue('%')">%</button>
-        <button class="operator" onclick="appendValue('/')">÷</button>
-
-        <button onclick="appendValue('7')">7</button>
-        <button onclick="appendValue('8')">8</button>
-        <button onclick="appendValue('9')">9</button>
-        <button class="operator" onclick="appendValue('*')">×</button>
-
-        <button onclick="appendValue('4')">4</button>
-        <button onclick="appendValue('5')">5</button>
-        <button onclick="appendValue('6')">6</button>
-        <button class="operator" onclick="appendValue('-')">−</button>
-
-        <button onclick="appendValue('1')">1</button>
-        <button onclick="appendValue('2')">2</button>
-        <button onclick="appendValue('3')">3</button>
-        <button class="operator" onclick="appendValue('+')">+</button>
-
-        <button onclick="appendValue('0')">0</button>
-        <button onclick="appendValue('.')">.</button>
-        <button class="equal" onclick="calculate()">=</button>
+<!-- Navbar -->
+<nav class="navbar navbar-expand-lg navbar-dark bg-primary fixed-top">
+    <div class="container">
+        <a class="navbar-brand fw-bold fs-3" href="#">
+            <i class="fas fa-graduation-cap"></i> UEIS
+        </a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ms-auto">
+                <li class="nav-item"><a class="nav-link" href="#home">Home</a></li>
+                <li class="nav-item"><a class="nav-link" href="#about">About</a></li>
+                <li class="nav-item"><a class="nav-link" href="#academics">Academics</a></li>
+                <li class="nav-item"><a class="nav-link" href="#contact">Contact</a></li>
+            </ul>
+        </div>
     </div>
-</div>
+</nav>
 
-<script>
-    const display = document.getElementById("display");
+<!-- ==================== HOME SECTION ==================== -->
+<section id="home" class="hero text-center">
+    <div class="container">
+        <h1 class="display-3 fw-bold mb-4">Ulaanbaatar Elite International School</h1>
+        <p class="lead fs-2 mb-5">"We are a family where love and learning come together."</p>
+        <a href="#about" class="btn btn-warning btn-lg px-5 py-3 fw-bold">Discover UEIS</a>
+    </div>
+</section>
 
-    function appendValue(value) {
-        display.value += value;
-    }
+<!-- ==================== ABOUT SECTION ==================== -->
+<section id="about" class="py-5 bg-light">
+    <div class="container">
+        <div class="text-center mb-5">
+            <h2 class="section-title display-5 fw-bold">About Our School</h2>
+        </div>
+        
+        <div class="row align-items-center g-5">
+            <div class="col-lg-6">
+                <img src="https://picsum.photos/id/1016/800/550" 
+                     class="img-fluid rounded-4 shadow" alt="UEIS Campus">
+            </div>
+            <div class="col-lg-6">
+                <h3 class="fw-bold">Welcome to the UEIS Family</h3>
+                <p class="lead">Established in 2005, Ulaanbaatar Elite International School has become one of Mongolia’s leading international schools with over 850 students from 12 different nationalities.</p>
+                
+                <p>We offer a dual curriculum that combines the globally recognized <strong>Cambridge International Curriculum</strong> with the <strong>Mongolian National Core Curriculum</strong>.</p>
+                
+                <div class="row mt-4">
+                    <div class="col-6">
+                        <div class="d-flex align-items-center mb-3">
+                            <i class="fas fa-check-circle fa-2x gold-accent me-3"></i>
+                            <div>
+                                <strong>Founded</strong><br>2005
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-6">
+                        <div class="d-flex align-items-center mb-3">
+                            <i class="fas fa-check-circle fa-2x gold-accent me-3"></i>
+                            <div>
+                                <strong>Students</strong><br>850+
+                            </div>
+                        </div>
+                    </div>
+                </div>
 
-    function clearDisplay() {
-        display.value = "";
-    }
+                <h5 class="mt-4">Our Core Values</h5>
+                <div class="d-flex gap-4 mt-3">
+                    <span class="badge bg-primary fs-6 px-4 py-3">Respect</span>
+                    <span class="badge bg-primary fs-6 px-4 py-3">Responsibility</span>
+                    <span class="badge bg-primary fs-6 px-4 py-3">Honesty</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
 
-    function deleteLast() {
-        display.value = display.value.slice(0, -1);
-    }
+<!-- ==================== ACADEMICS SECTION ==================== -->
+<section id="academics" class="py-5">
+    <div class="container">
+        <div class="text-center mb-5">
+            <h2 class="section-title display-5 fw-bold">Our Academics</h2>
+            <p class="lead text-muted">World-class education from Early Years to University Preparation</p>
+        </div>
 
-    function calculate() {
-        try {
-            display.value = eval(display.value);
-        } catch {
-            display.value = "Error";
-        }
-    }
-</script>
+        <div class="row g-4">
+            <!-- Primary -->
+            <div class="col-lg-4 col-md-6">
+                <div class="card h-100">
+                    <img src="https://picsum.photos/id/870/600/400" class="card-img-top" alt="Primary">
+                    <div class="card-body">
+                        <h5 class="card-title">Primary & Lower Secondary</h5>
+                        <p class="card-text">Strong foundation in academics, character development, and critical thinking for ages 4–14.</p>
+                        <ul class="list-unstyled mt-3">
+                            <li><i class="fas fa-check text-success"></i> English Medium</li>
+                            <li><i class="fas fa-check text-success"></i> Cambridge Primary</li>
+                            <li><i class="fas fa-check text-success"></i> Mongolian Language & Culture</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
 
+            <!-- IGCSE -->
+            <div class="col-lg-4 col-md-6">
+                <div class="card h-100">
+                    <img src="https://picsum.photos/id/201/600/400" class="card-img-top" alt="IGCSE">
+                    <div class="card-body">
+                        <h5 class="card-title">IGCSE (Grades 9–10)</h5>
+                        <p class="card-text">Internationally recognized qualification that prepares students for advanced studies.</p>
+                        <ul class="list-unstyled mt-3">
+                            <li><i class="fas fa-check text-success"></i> Wide subject choices</li>
+                            <li><i class="fas fa-check text-success"></i> Practical assessments</li>
+                            <li><i class="fas fa-check text-success"></i> Global recognition</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- A Level -->
+            <div class="col-lg-4 col-md-6">
+                <div class="card h-100">
+                    <img src="https://picsum.photos/id/1015/600/400" class="card-img-top" alt="A Level">
+                    <div class="card-body">
+                        <h5 class="card-title">AS & A Level (Grades 11–12)</h5>
+                        <p class="card-text">The gold standard qualification for university entrance worldwide.</p>
+                        <ul class="list-unstyled mt-3">
+                            <li><i class="fas fa-check text-success"></i> University pathways</li>
+                            <li><i class="fas fa-check text-success"></i> Specialized subjects</li>
+                            <li><i class="fas fa-check text-success"></i> Critical thinking focus</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Contact Footer -->
+<footer id="contact" class="bg-dark text-white py-5">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6">
+                <h4>Ulaanbaatar Elite International School</h4>
+                <p>Seoul Street, 2nd Khoroo,<br>Sukhbaatar District,<br>Ulaanbaatar 14251, Mongolia</p>
+            </div>
+            <div class="col-md-6 text-md-end">
+                <p><strong>Contact Us</strong><br>
+                Phone: +976 7010 5010<br>
+                Email: info@elite.edu.mn</p>
+            </div>
+        </div>
+        <hr class="my-4">
+        <div class="text-center">
+            <p>&copy; 2026 Ulaanbaatar Elite International School • ICT Project</p>
+        </div>
+    </div>
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
